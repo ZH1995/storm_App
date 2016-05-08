@@ -92,9 +92,28 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.config', 'ng
           }
         }
       })
+      .state('tab.login', {
+        url: '/login',
+        views: {
+          'tab-user': {
+            templateUrl: 'templates/user/login.html',
+            controller: 'LoginCtrl'
+          }
+        }
+      })
+      .state('tab.register', {
+        url: '/register',
+        views: {
+          'tab-user': {
+            templateUrl: 'templates/user/register.html',
+            controller: 'RegisterCtrl'
+          }
+        }
+      })
+
 
       .state('news_content', {
-        url: '/news_content/:aid',
+        url: '/news_content/:article_id',
         templateUrl: "templates/article/article-content.html",
         controller: 'NewsContentCtrl'
       });
