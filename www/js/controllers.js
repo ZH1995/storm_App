@@ -5,15 +5,36 @@
 
 angular.module('starter.controllers', [])
 
-  .controller('HomeCtrl', function($scope,ENV) {
-
-    console.log(ENV.api);
-
+  .controller('HomeCtrl', function($scope, ArticleFactory, ENV) {
     $scope.name='HomeCtrl';
+    $scope.ENV=ENV;
+    $scope.showloading = true;
+
+    //获取服务器数据保存
+
+    ArticleFactory.getTopTopics();
+    //接收到刚才传过来的通知
+    $scope.$on('PortalList.portalsUpdated', function() {
+      $scope.portalListData=ArticleFactory.getArticles();
+      $scope.showloading = false;
+    });
+    //下拉更新
+    $scope.doRefresh=function(){
+      ArticleFactory.getTopTopics();
+      $scope.$broadcast('scroll.refreshComplete');
+    };
+    //上拉更新
+    $scope.loadMore=function(){
+      ArticleFactory.getMoreTopics();
+      $scope.$broadcast('scroll.infiniteScrollComplete');
+    };
+    $scope.hasNextPage = function() {
+      //console.log(PortalsFactory.hasNextPage());
+      return ArticleFactory.hasNextPage();
+    };
   })
 
   //ArticleCtrl
-
   .controller('ArticleCtrl', function($scope,ArticleFactory,ENV) {
     $scope.name='ArticleCtrl';
     $scope.ENV=ENV;
@@ -60,12 +81,6 @@ angular.module('starter.controllers', [])
       ArticleFactory.setArticleCateId(cateid);
 
     }
-
-
-
-
-
-
   })
 
   //文章详情
@@ -85,9 +100,6 @@ angular.module('starter.controllers', [])
     });
 
     $scope.name='NewsContentCtrl';
-
-
-
   })
 
 
