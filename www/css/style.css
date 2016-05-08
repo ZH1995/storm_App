@@ -1,0 +1,46 @@
+/* Empty. Add your own CSS if you like */
+
+/*tabs*/
+
+.tabs-color-positive .tab-item{
+  color: #999;
+}
+
+/*home*/
+.home-slide ion-slide img{
+  height: 150px;
+  width: 100%;
+}
+
+.slider-pager{
+  bottom: 10px;
+}
+
+.slider-pager .slider-pager-page{
+  font-size: 5px;
+}
+
+/*二级菜单*/
+.bar .sub_header_list .button.button-clear{
+
+  border-bottom: 1px solid #eee;
+}
+.sub_header_list{
+  width: 160%;
+}
+.sub_header_list .button{
+  width: 20%;
+  color:#666;
+}
+.bar .sub_header_list .button.sub_button_select{
+  border-bottom:2px solid #387ef5;
+  position:relative;
+}
+.bar-subheader{
+  border-bottom: none;
+}
+
+/*文章详情*/
+.article-content img{
+  max-width: 90%;
+}
