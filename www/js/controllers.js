@@ -6,7 +6,7 @@
 angular.module('starter.controllers', [])
 
   .controller('HomeCtrl', function($scope, ArticleFactory, ENV) {
-    $scope.name='HomeCtrl';
+
     $scope.ENV=ENV;
 
     // 测试
@@ -151,18 +151,23 @@ angular.module('starter.controllers', [])
   })
 
 
-
-
   //文章详情
-  .controller('NewsContentCtrl', function($scope,$stateParams,ArticleContentFactory) {
+  .controller('NewsContentCtrl', function($scope, $rootScope, $stateParams,ArticleContentFactory) {
 
-    var article_id=$stateParams['article_id'];
+    $scope.article_id=$stateParams['article_id'];
 
     // 测试
     $scope.showloading = false;
     $scope.NewsContentData = {
       'headline': '新闻标题',
-      'content': '这是内容',
+      'content': "岐王宅里寻常见，崔九堂前几度闻。\
+      正是江南好风景，落花时节又逢君。\
+这首《江南逢李龟年》是老杜写景抒情之名篇，脍炙人口，妇孺皆知，在历代广为传颂，然而仔细品读却是句句皆悲，字字是血矣。\
+李龟年何许人也？盛唐之时的著名乐工。早年在王公贵族家中演唱，一曲赏金不知数。后来入宫作为梨园弟子，深受唐玄宗宠幸。\
+    李家在东都洛阳建造的府邸，比公侯将相的房子还要高大。然而，眼见他起高楼，眼见他宴宾客，眼见他楼塌了。天宝十四年，\
+    一场突然起来战乱，改变了大唐的国运，也改变了李龟年的人生….\
+    安史之乱，唐玄宗仓皇出逃，避难巴蜀。树倒猢狲散，李龟年也流落江南。当年的宫廷乐工，今日只得靠卖唱为生。昔日王谢堂\
+      前燕，飞入寻常百姓家，世间最大的悲凉莫过于此吧。",
       'pic': 'img/ionic.png',
       'source': '作者',
       'create_time': '2016/05/08',
@@ -180,9 +185,6 @@ angular.module('starter.controllers', [])
   })
 
 
-  .controller('ThreadCtrl', function($scope) {
-    $scope.name='ThreadCtrl';
-  })
 
   .controller('UserCtrl', function($scope, $rootScope) {
     var storageKey = 'user';
@@ -236,4 +238,18 @@ angular.module('starter.controllers', [])
       console.log('registerCtrl', user);
       $state.go('tabs.home');
     };
+  })
+
+  .controller('PublicCtrl', function($scope, $stateParams, $state){
+    $scope.article_id = $stateParams['article_id'];
+    //$scope.username = $stateParams['username'];
+    $scope.comment = '';
+    $scope.submit_comment = function(){
+      $scope.date = new Date().toLocaleString();
+      /*
+      调用提交服务，参数为用户名、评论内容、评论时间
+      CommentFactory.submit_comment($scope.username, $scope.comment, $scope.date);
+       */
+      $state.go('news_content', {article_id: $scpe.article_id}); // 路由跳转
+    }
   })

@@ -3,7 +3,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.config', 'ngResource', 'starter.services'])
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.config', 'ngResource', 'starter.directive', 'starter.services'])
 
   /*
 .run(function($ionicPlatform) {
@@ -74,15 +74,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.config', 'ng
           }
         }
       })
-      .state('tab.thread', {
-        url: '/thread',
-        views: {
-          'tab-thread': {
-            templateUrl: 'templates/thread/thread.html',
-            controller: 'ThreadCtrl'
-          }
-        }
-      })
       .state('tab.user', {
         url: '/user',
         views: {
@@ -111,11 +102,19 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.config', 'ng
         }
       })
 
-
       .state('news_content', {
         url: '/news_content/:article_id',
         templateUrl: "templates/article/article-content.html",
         controller: 'NewsContentCtrl'
+      })
+      .state('news_content.comment', {
+        url: '/comment/:article_id:username',
+        views:{
+          'news_content':{
+            templateUrl: "templates/public/public.html",
+            controller: 'PublicCtrl'
+          }
+        }
       });
 
 
